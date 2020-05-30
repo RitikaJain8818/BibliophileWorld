@@ -41,7 +41,7 @@ export class Search extends Component {
           <input
             type="text"
             className="form-control form-control-lg"
-            placeholder="Book title..."
+            placeholder="William Shakespeare Invisible Man Harry Potter"
             value={this.state.text}
             onChange={this.onChange}
           />

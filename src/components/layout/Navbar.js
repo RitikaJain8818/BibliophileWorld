@@ -22,7 +22,7 @@ const Navbar = ({ icon, title }) => {
 
 Navbar.defaultProps = {
   icon: "fas fa-book",
-  title: "Book Store"
+  title: "Bibliophile World"
 };
 
 Navbar.propTypes = {
