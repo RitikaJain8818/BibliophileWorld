@@ -1,8 +1,7 @@
-# Book Finder App
-
-A Book Finder app built with React and the Google Books API.
-
-<img src="./raw/bookfinder.gif?raw=true" >
+# Bibliophile World
+Bibliophile World is a simple web app built with React and the Google Books
+          API that lets you search for your favourite books and displays information based on the
+          results of the search. You can search using anything related to the book like name, author or content
 
 ## Usage
 
@@ -12,13 +11,8 @@ A Book Finder app built with React and the Google Books API.
 
 ### Start dev server
 
-`npm run start`
+`npm start`
 
 ### Build
 
-`npm run build`
-
-
-## Contributing
-
-Your meaningful issues or pull requests are highly welcome ✨✨
+`npm build`
