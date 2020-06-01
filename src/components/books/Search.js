@@ -13,7 +13,9 @@ export class Search extends Component {
     clearBooks: PropTypes.func.isRequired,
     setText: PropTypes.func.isRequired,
     setSort: PropTypes.func.isRequired,
-    sort:PropTypes.string.isRequired
+    sort:PropTypes.string.isRequired,
+    lang: PropTypes.string.isRequired,
+    setLang: PropTypes.func.isRequired
   };
   onChange=e=>{
     this.setState({text:e.target.value});
@@ -37,7 +39,7 @@ export class Search extends Component {
       <h1 className="display-4 text-center">
         <i className="fas fa-book" /> Search For A Book
       </h1>
-      <p className="lead text-center">Get the details for any book</p>
+      <p className="lead text-center text-white bg-dark">Get the details for any book</p>
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
           <input
@@ -72,7 +74,7 @@ export class Search extends Component {
       </form>
     </div>
 
-        <div className="form-text mb-10">
+        <div className="card card-body mb-4 p-4 bg-dark">
           You can search using anything related to the book like name, author or
           content
         </div>

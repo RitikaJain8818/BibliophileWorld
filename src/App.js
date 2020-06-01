@@ -84,7 +84,7 @@ setLang = (e) => {
     const { books, loading, alert, filter, sort, lang } = this.state;
     return (
       <Router>
-        <div>
+        <div className="img">
           <Navbar />
           <div className="container">
             <Alert alert={alert} />
@@ -106,7 +106,6 @@ setLang = (e) => {
                       setLang={this.setLang}
                     />
                     <Dropdown className="p-4" title="Select Type" items={this.items} multiSelect filter books setFilter={this.setFilter}/>
-
                     <Books books={books} loading={loading} />
                   </Fragment>
                 )}
