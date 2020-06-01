@@ -15,12 +15,15 @@ export class App extends Component {
     books: [],
     loading: false,
     alert: null,
-    filter: 'partial'
+    filter: 'partial',
+    text:'',
+    sort:'newest',
+    lang:'en'
   };
   items = [
     {
       id: 1,
-      value: 'Results With Exact Name',
+      value: 'Results With Full Name',
       filVal: 'full'
     },
     {
@@ -39,12 +42,10 @@ export class App extends Component {
       filVal: 'ebooks'
     },
   ];
-
   searchBooks = async text => {
-    console.log(this.state.filter);
     this.setState({ loading: true });
-      var res = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${text}&filter=${this.state.filter}&startIndex=0&maxResults=40`      
+     const res = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=${text}&filter=${this.state.filter}&orderBy=${this.state.sort}&langRestrict=${this.state.lang}&startIndex=0&maxResults=40`      
         );
       this.setState({ books: res.data.items, loading: false });
     
@@ -59,9 +60,28 @@ export class App extends Component {
   clearBooks = () => {
     this.setState({books: [], loading: false})
   }
+  setFilter = (filter) => {
+    this.setState({filter: filter})
+    if(this.state.text!=='')
+      this.searchBooks(this.state.text);
+  }
+  setText = value => {
+    this.setState({ text: value });
+    console.log(this.state.text);
+  };
+  setSort = (e) => {
+    this.setState({ sort: e.target.value});
+    if(this.state.text!=='')
+      this.searchBooks(this.state.text);
+};
+setLang = (e) => {
+  this.setState({ lang: e.target.value});
+  if(this.state.text!=='')
+    this.searchBooks(this.state.text);
+}
 
   render() {
-    const { books, loading, alert, filter } = this.state;
+    const { books, loading, alert, filter, sort, lang } = this.state;
     return (
       <Router>
         <div>
@@ -77,10 +97,16 @@ export class App extends Component {
                     <Search
                       searchBooks={this.searchBooks}
                       books={books}
+                      setText={this.setText}
                       setAlert={this.setAlert}
                       clearBooks = {this.clearBooks}
+                      setSort={this.setSort}
+                      sort={sort}
+                      lang={lang}
+                      setLang={this.setLang}
                     />
-                    <Dropdown className="p-4" title="Select Type" items={this.items} multiSelect filter/>
+                    <Dropdown className="p-4" title="Select Type" items={this.items} multiSelect filter books setFilter={this.setFilter}/>
+
                     <Books books={books} loading={loading} />
                   </Fragment>
                 )}

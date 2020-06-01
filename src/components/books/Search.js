@@ -8,15 +8,17 @@ export class Search extends Component {
 
   static propTypes = {
     searchBooks: PropTypes.func.isRequired,
-    setAlert: PropTypes.func.isRequired,
     books: PropTypes.array.isRequired,
-    clearBooks: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    clearBooks: PropTypes.func.isRequired,
+    setText: PropTypes.func.isRequired,
+    setSort: PropTypes.func.isRequired,
+    sort:PropTypes.string.isRequired
   };
-
-  onChange = e => {
-    this.setState({ text: e.target.value });
-  };
-
+  onChange=e=>{
+    this.setState({text:e.target.value});
+    this.props.setText(this.state.text);
+  }
   onSubmit = e => {
     e.preventDefault();
     if (!/\S/.test(this.state.text)) {
@@ -46,13 +48,31 @@ export class Search extends Component {
             onChange={this.onChange}
           />
         </div>
+        <select value={this.props.sort} onChange={this.props.setSort}>
+                <option value="" disabled selected>Sort</option>
+                <option value="Newest">Newest</option>
+                <option value="Relevance">Relevance</option>
+        </select>
+        <select value={this.props.lang} onChange={this.props.setLang}>
+                <option value="" disabled selected>Select Language</option>
+                <option value="ar">Arabic</option>
+                <option value="zh">Chinese</option>
+                <option value="en">English</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="hi">Hindi</option>
+                <option value="ja">Japanese</option>
+                <option value="pt">Portuguese</option>
+                <option value="ru">Russian</option>
+                <option value="es">Spanish</option>
+        </select>
         <button className="btn btn-primary btn-lg btn-block" type="submit">
           Get Book Details
         </button>
       </form>
     </div>
 
-        <div className="form-text">
+        <div className="form-text mb-10">
           You can search using anything related to the book like name, author or
           content
         </div>
@@ -69,5 +89,4 @@ export class Search extends Component {
     );
   }
 }
-
 export default Search;

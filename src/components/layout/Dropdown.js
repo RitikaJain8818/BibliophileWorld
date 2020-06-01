@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import onClickOutside from 'react-onclickoutside';
 import axios from "axios";
+import PropTypes from "prop-types";
 
-function Dropdown({ title, items, multiSelect = false, filter}) {
+function Dropdown({ title, items, multiSelect = false, filter, books,setFilter}) {
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState([]);
   const toggle = () => setOpen(!open);
@@ -12,8 +13,8 @@ function Dropdown({ title, items, multiSelect = false, filter}) {
     if (!selection.some(current => current.id === item.id)) {
       if (multiSelect) {
         setSelection([item]);
-        filter=item.filVal;
         toggle()
+        setFilter(item.filVal);
       }
     } else {
       let selectionAfterRemoval = selection;
@@ -21,8 +22,8 @@ function Dropdown({ title, items, multiSelect = false, filter}) {
         current => current.id !== item.id
       );
       setSelection([...selectionAfterRemoval]);
-      filter='partial';
       toggle()
+      setFilter('partial');
     }
   }
 
